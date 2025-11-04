@@ -1,0 +1,53 @@
+
+
+## ✅ Problem Solved
+
+This project primarily addressed the challenge of **deploying a secure, scalable, and highly available dynamic website** in a cloud environment. Key problems solved include:
+
+1. **Scalability & Elasticity**:  
+   By using an Auto Scaling Group and Load Balancer, the website can handle varying traffic loads without manual intervention.
+
+2. **High Availability & Fault Tolerance**:  
+   Deploying resources across multiple Availability Zones ensures the website remains accessible even if one zone experiences issues.
+
+3. **Secure Access & Network Segmentation**:  
+   Hosting EC2 instances in private subnets and using EC2 Instance Connect Endpoint and NAT Gateway improved security and controlled access.
+
+4. **Automated Deployment**:  
+   The use of EC2 user data scripts and S3 for code storage streamlined the provisioning and deployment process.
+
+5. **Monitoring & Alerts**:  
+   Integration with SNS provided real-time notifications for scaling events, improving operational awareness.
+
+6. **Domain Management & SSL Security**:  
+   Route 53 and AWS Certificate Manager ensured professional domain setup and secure HTTPS communication.
+
+---
+
+## ⚠️ Issues Encountered & Resolutions
+
+Here are some common issues that likely arose during the project and how they were resolved:
+
+### 1. **EC2 Instances Not Accessible**
+- **Issue**: EC2 instances in private subnets were unreachable via SSH.
+- **Resolution**: Implemented **EC2 Instance Connect Endpoint** to securely access instances without exposing them to the public internet.
+
+### 2. **Application Not Loading Properly**
+- **Issue**: After deployment, the website didn’t render correctly.
+- **Resolution**: Ensured that:
+  - Apache and PHP were properly installed.
+  - File permissions were set correctly (`chmod -R 777`).
+  - `.env` file was configured with correct database credentials.
+
+### 3. **S3 Sync Failures**
+- **Issue**: EC2 instance failed to sync files from S3.
+- **Resolution**: Verified IAM role permissions attached to EC2 instance and ensured the instance had access to the S3 bucket.
+
+### 4. **Load Balancer Health Checks Failing**
+- **Issue**: Instances were marked unhealthy by the Load Balancer.
+- **Resolution**: Adjusted health check path and ensured Apache was running and serving content at the expected endpoint.
+
+
+---
+
+Would you like me to format this into a section for your GitHub README or create a separate document summarizing lessons learned and troubleshooting?
