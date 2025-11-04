@@ -48,6 +48,3 @@ Here are some common issues that likely arose during the project and how they we
 - **Resolution**: Adjusted health check path and ensured Apache was running and serving content at the expected endpoint.
 
 
----
-
-Would you like me to format this into a section for your GitHub README or create a separate document summarizing lessons learned and troubleshooting?
