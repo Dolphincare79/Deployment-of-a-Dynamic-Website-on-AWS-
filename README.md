@@ -2,7 +2,7 @@
 
 ## 📘 Project Overview
 
-This project demonstrates the deployment of a dynamic PHP-based website on AWS using a highly available, scalable, and secure architecture. It leverages multiple AWS services to ensure fault tolerance, elasticity, and secure access to resources across public and private subnets.
+This project showcases the deployment of a dynamic PHP-based website on AWS using a secure, scalable, and highly available architecture. It integrates multiple AWS services to ensure fault tolerance, elasticity, and secure access across public and private subnets.
 
 ## 📌 Architecture Highlights
 
@@ -21,9 +21,24 @@ This project demonstrates the deployment of a dynamic PHP-based website on AWS u
 - **Route 53**: Domain registration and DNS configuration.
 - **S3 Bucket**: Stores application code and assets.
 
-## 🚀 Deployment Script
+## 🚀 Deployment Steps
 
-The EC2 user data script automates the setup of the web server, PHP environment, MySQL database, and deployment of the application code from S3.
+### 1. **Infrastructure Setup**
+- Create a VPC with public and private subnets across two Availability Zones.
+- Attach an Internet Gateway to the VPC.
+- Set up route tables for public and private subnets.
+- Deploy NAT Gateway in a public subnet for outbound internet access from private subnets.
+- Configure Security Groups for EC2, Load Balancer, and database access.
+- Create EC2 Instance Connect Endpoint for secure SSH access.
+
+### 2. **Application Hosting**
+- Launch EC2 instances in private subnets using an Auto Scaling Group.
+- Attach instances to a Target Group behind an Application Load Balancer.
+- Use AWS Certificate Manager to provision SSL certificates for secure traffic.
+- Configure Route 53 with a hosted zone and DNS records pointing to the Load Balancer.
+
+### 3. **Web Server Initialization**
+Use the following EC2 user data script to install and configure Apache, PHP, MySQL, and deploy the application from S3:
 
 ```bash
 #!/bin/bash
@@ -56,10 +71,14 @@ sudo vi .env
 sudo service httpd restart
 ```
 
+### 4. **Monitoring & Alerts**
+- Configure Amazon SNS to send notifications for Auto Scaling events.
+- Set up CloudWatch alarms for EC2 instance health and scaling metrics.
+
 ## 📁 Repository Contents
 
 - `reference-diagram.png`: Visual representation of the AWS architecture.
-- `deployment-script.txt`: EC2 user data script for automated setup.
+- `deployment-script.sh`: EC2 user data script for automated setup.
 - `README.md`: Project documentation.
 
 ## 🌐 Domain & DNS
